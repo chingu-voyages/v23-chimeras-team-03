@@ -1,6 +1,6 @@
-# v21-chimeras-team-03
+# v23-chimeras-team-03
 
-# Food-Recipes-App
+# Food-Recipes-App | Voyage-23 | https://chingu.io/
 
 ## **Overview**
 

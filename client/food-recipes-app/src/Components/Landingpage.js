@@ -15,7 +15,12 @@ function Landingpage() {
     <nav className="navbar">
       <h1>Logo</h1>
       <form onSubmit={formSubmit}>
-        <input onChange={searchHandler} value={search} type="text"></input>
+        <input
+          onChange={searchHandler}
+          value={search}
+          type="text"
+          className="nav-Input"
+        ></input>
         <button>Search</button>
       </form>
       <form>

@@ -50,15 +50,41 @@
   background-color: orange;
 }
 
+.nav-form {
+  display: flex;
+  width: 500px;
+}
 .nav-Input {
   font-size: inherit;
   font-family: inherit;
   border-radius: 100px;
-  background-color: grey;
+  background-color: white;
   color: inherit;
-  padding: 1rem 3rem;
+  padding: 10px 20px;
   width: 90%;
   transition: all 0.2s;
   margin-right: -3rem;
   border: none;
+}
+
+.nav-Input:focus {
+  outline: none;
+}
+
+.nav-btn {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.nav-logo {
+  color: white;
 }

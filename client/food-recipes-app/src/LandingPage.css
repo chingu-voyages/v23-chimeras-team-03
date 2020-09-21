@@ -1,15 +1,15 @@
 .container {
   display: flex;
-  width: 1000px;
+  width: 100vw;
   height: 300px;
 }
 
 .recipes {
   width: 50%;
-  background-color: aqua;
+  background-color: #fdfcfa;
 }
 
 .recipe-Ingredents {
   width: 50%;
-  background-color: aqua;
+  background-color: #fdfcfa;
 }

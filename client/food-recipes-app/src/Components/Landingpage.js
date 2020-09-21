@@ -15,7 +15,9 @@ function Landingpage() {
   return (
     <div>
       <nav className="navbar">
-        <h1 className="nav-logo">Logo</h1>
+        <h1 className="nav-logo" style={{ marginLeft: "20px" }}>
+          Logo
+        </h1>
         <form
           onSubmit={formSubmit}
           className="nav-form"
@@ -31,7 +33,7 @@ function Landingpage() {
             Search
           </button>
         </form>
-        <form>
+        <form style={{ marginRight: "20px" }}>
           <button className="nav-btn">Sign Up</button>
           <button className="nav-btn">login</button>
         </form>

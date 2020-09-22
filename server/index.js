@@ -1,13 +1,12 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import  sequelize  from './utils/sequelize.js';
-import  syncModels  from './utils/syncModels.js';
-
-
-
+import express from "express";
+import dotenv from "dotenv";
+import sequelize from "./utils/sequelize.js";
+import syncModels from "./utils/syncModels.js";
+const cors = require("cors");
 
 const main = async () => {
-  const app = express();dotenv.config({path:"./config"});
+  const app = express();
+  dotenv.config({ path: "./config" });
 
   //load .env variable
 
@@ -17,9 +16,9 @@ const main = async () => {
 
   try {
     await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error("Unable to connect to the database:", error);
   }
 
   // testing connection

@@ -60,10 +60,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   brandname: {
-    color: "white",
+    color: "#171311",
     fontSize: "40px",
     fontWeight: "bold",
-    [theme.breakpoints.up("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "none",
     },
   },

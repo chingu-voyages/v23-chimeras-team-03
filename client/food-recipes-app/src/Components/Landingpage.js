@@ -35,7 +35,8 @@ function Landingpage() {
         </form>
         <form style={{ marginRight: "20px" }}>
           <button className="nav-btn">Sign Up</button>
-          <button className="nav-btn">login</button>
+
+          <button className="nav-btn">Login</button>
         </form>
       </nav>
       <LandingPagebody />

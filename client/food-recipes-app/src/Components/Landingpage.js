@@ -5,6 +5,14 @@ import ErrorSnackBar from "./ErrorSnackBar";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import { v4 as uuidv4 } from "uuid";
 import Axios from "axios";
 
@@ -51,8 +59,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   logo: {
-    marginLeft: "20px",
-    marginRight: "10px",
+    margin: "5px",
+    [theme.breakpoints.down("xs")]: {
+      width: "60px",
+      height: "60px",
+    },
   },
   brand: {
     display: "flex",
@@ -63,14 +74,52 @@ const useStyles = makeStyles((theme) => ({
     color: "#171311",
     fontSize: "40px",
     fontWeight: "bold",
+  },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  title: {
     [theme.breakpoints.down("xs")]: {
       display: "none",
     },
+    color: "#1A1C20",
+    fontWeight: "bold",
+    fontSize: "30px",
+  },
+  right: {
+    display: "flex",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+    flexGrow: "0.75",
+    marginRight: "15px",
+  },
+  login: {
+    backgroundColor: "#F4F4F4",
+    color: "#CF7500",
+    marginRight: "5px",
   },
 }));
 
 function Landingpage() {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [alert, setAlert] = useState("");
@@ -107,39 +156,77 @@ function Landingpage() {
   const baseUrl = `https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}`;
 
   return (
-    <div>
-      <nav className="navbar">
-        <div className={classes.brand}>
-          <img
-            src="/favicon.ico"
-            alt="logo"
-            width="80"
-            height="80"
-            className={classes.logo}
-          />
-          <span className={classes.brandname}>Foody</span>
-        </div>
+    <div className={classes.root}>
+      <AppBar position="static" style={{ background: "#F0A500" }}>
+        <Toolbar>
+          <div>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MenuIcon aria-controls="simple menu" aria-haspopup="true" />
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Log In</MenuItem>
+              <MenuItem onClick={handleClose}>Register</MenuItem>
+            </Menu>
+          </div>
 
-        <form onSubmit={formSubmit}>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-              onChange={searchHandler}
-              value={search}
-              type="text"
+          <div className={classes.brand}>
+            <img
+              src="/favicon.ico"
+              alt="logo"
+              width="80"
+              height="80"
+              className={classes.logo}
             />
           </div>
+          <Typography variant="h6" className={classes.title}>
+            Foody
+          </Typography>
+
+          <div className={classes.search}>
+            <form onSubmit={formSubmit}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+                onChange={searchHandler}
+                value={search}
+                type="text"
+              />
+            </form>
+          </div>
           <div className={classes.grow} />
-        </form>
-      </nav>
+          <div className={classes.right}>
+            <Button variant="contained" className={classes.login}>
+              Log In
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.register}
+            >
+              Sign Up
+            </Button>
+          </div>
+        </Toolbar>
+      </AppBar>
       {alert !== "" && <ErrorSnackBar alert={alert} />}
       {recipes !== [] &&
         recipes.map((recipe) => (

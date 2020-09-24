@@ -92,11 +92,11 @@ function LandingPageBody({ recipe }) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon style={{ zIndex: "10" }} />
+          <ExpandMoreIcon />
         </IconButton>
       </CardActions>
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" unmountOnExit collapsedHeight={20}>
         <CardContent>
           <Typography paragraph>Ingredients:</Typography>
           {expanded && <RecipeDetails ingredients={ingredients} />}

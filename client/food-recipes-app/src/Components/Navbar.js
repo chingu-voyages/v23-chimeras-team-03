@@ -14,6 +14,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { v4 as uuidv4 } from "uuid";
 import Axios from "axios";
+import ProductHero from "./ProductHero";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -242,9 +243,11 @@ function NavBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <Typography variant="h6">Search Results: {recipes.count}</Typography>
+
       {alert !== "" && <ErrorSnackBar alert={alert} />}
+
       <div className={classes.recipes}>
+        {recipes === [] && <ProductHero />}
         {recipes !== [] &&
           recipes.map((recipe) => (
             <LandingPagebody key={uuidv4()} recipe={recipe} />

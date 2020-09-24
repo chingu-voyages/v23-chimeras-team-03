@@ -7,7 +7,7 @@ import ErrorIcon from "@material-ui/icons/Error";
 const styles = (theme) => ({
   snackbar: {
     margin: theme.spacing(4),
-    background: "#EAE2B7",
+    background: "#FFC93C",
     display: "flex",
     padding: "6px 24px",
     flexWrap: "wrap",
@@ -16,6 +16,10 @@ const styles = (theme) => ({
   message: {
     display: "flex",
     alignItems: "center",
+    color: "#171311",
+  },
+  icon: {
+    marginRight: "4px",
   },
 });
 
@@ -28,7 +32,7 @@ function ErrorMessages(props) {
         className={classes.snackbar}
         message={
           <span className={classes.message}>
-            <ErrorIcon />
+            <ErrorIcon className={classes.icon} />
             {alert}
           </span>
         }

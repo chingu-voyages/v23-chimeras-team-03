@@ -4,12 +4,7 @@ import LandingPage from "./Components/Landingpage";
 import Dashboard from "./Components/Dashboard";
 import SignIn from "./Components/signin";
 import SignUp from "./Components/signup";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (

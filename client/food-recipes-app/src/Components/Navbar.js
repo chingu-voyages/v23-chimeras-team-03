@@ -103,6 +103,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     fontWeight: "bold",
   },
+  app: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
   recipes: {
     width: "100%",
     display: "flex",
@@ -245,13 +250,14 @@ function NavBar() {
       </AppBar>
 
       {alert !== "" && <ErrorSnackBar alert={alert} />}
-
-      <div className={classes.recipes}>
-        {recipes === [] && <ProductHero />}
-        {recipes !== [] &&
-          recipes.map((recipe) => (
-            <LandingPagebody key={uuidv4()} recipe={recipe} />
-          ))}
+      <div className={classes.app}>
+        <div className={classes.recipes}>
+          {recipes === [] && <ProductHero />}
+          {recipes !== [] &&
+            recipes.map((recipe) => (
+              <LandingPagebody key={uuidv4()} recipe={recipe} />
+            ))}
+        </div>
       </div>
     </div>
   );

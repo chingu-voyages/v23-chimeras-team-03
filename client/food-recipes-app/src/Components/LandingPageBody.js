@@ -21,13 +21,13 @@ import RestaurantMenuOutlinedIcon from "@material-ui/icons/RestaurantMenuOutline
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "30rem",
+    width: "30rem",
     margin: "1rem",
     display: "flex",
     flexDirection: "column",
     padding: "2rem",
     position: "relative",
-    background: "lightsalmon",
+    backgroundColor: "bisque",
   },
   media: {
     height: 0,
@@ -73,7 +73,7 @@ function LandingPageBody({ recipe }) {
       <CardMedia className={classes.media} image={image} title={label} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          DietLabel as: {dietLabels}. Check out original source from{" "}
+          DietLabel as:<strong>{dietLabels | "NA"}</strong> . By{" "}
           <strong>{source}'s</strong>.<Link href={url}>Link here</Link>
         </Typography>
       </CardContent>

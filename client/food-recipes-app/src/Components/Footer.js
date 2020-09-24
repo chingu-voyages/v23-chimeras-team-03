@@ -11,12 +11,11 @@ export function Copyright() {
       {"© "}
       <Link
         color="inherit"
-        href="https://github.com/chingu-voyages/v21-geckos-team-02"
+        href="https://github.com/chingu-voyages/v23-chimeras-team-03"
       >
         Foody, Inc.
       </Link>{" "}
-      {new Date().getFullYear()}. &nbsp;
-      <span>All rights reserved.</span>
+      {new Date().getFullYear()}. &nbsp; All rights reserved
     </React.Fragment>
   );
 }

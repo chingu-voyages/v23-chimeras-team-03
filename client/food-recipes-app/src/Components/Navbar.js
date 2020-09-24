@@ -58,19 +58,13 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     margin: "5px",
     [theme.breakpoints.down("xs")]: {
-      width: "60px",
-      height: "60px",
+      display: "none",
     },
   },
   brand: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  brandname: {
-    color: "#171311",
-    fontSize: "40px",
-    fontWeight: "bold",
   },
   root: {
     flexGrow: 1,
@@ -106,8 +100,14 @@ const useStyles = makeStyles((theme) => ({
   register: {
     fontSize: 20,
     marginRight: theme.spacing(2),
-    color: "#de4463",
     fontWeight: "bold",
+  },
+  recipes: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
 }));
 
@@ -133,8 +133,6 @@ function NavBar() {
   async function getRecipes() {
     if (search !== "") {
       const response = await Axios.get(baseUrl);
-      console.log(baseUrl);
-      console.log(response);
 
       if (!response.data.more) {
         return setAlert("No food with provided name!");
@@ -236,6 +234,7 @@ function NavBar() {
             <Link
               href="/register"
               underline="none"
+              color="secondary"
               className={classes.register}
             >
               {"SIGN UP"}
@@ -243,11 +242,14 @@ function NavBar() {
           </div>
         </Toolbar>
       </AppBar>
+      <Typography variant="h6">Search Results: {recipes.count}</Typography>
       {alert !== "" && <ErrorSnackBar alert={alert} />}
-      {recipes !== [] &&
-        recipes.map((recipe) => (
-          <LandingPagebody key={uuidv4()} recipe={recipe} />
-        ))}
+      <div className={classes.recipes}>
+        {recipes !== [] &&
+          recipes.map((recipe) => (
+            <LandingPagebody key={uuidv4()} recipe={recipe} />
+          ))}
+      </div>
     </div>
   );
 }

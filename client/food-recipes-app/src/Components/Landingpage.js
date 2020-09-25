@@ -1,46 +1,17 @@
-import React, { useState } from "react";
-import LandingPagebody from "./LandingPageBody";
-import "../App.css";
-function Landingpage() {
-  const [search, setSearch] = useState("");
+import React, { Fragment } from "react";
 
-  function searchHandler(e) {
-    setSearch(e.target.value);
-  }
+import NavBar from "./Navbar";
+import Footer from "./Footer";
+import ProductHero from "./ProductHero";
 
-  function formSubmit(e) {
-    e.preventDefault();
-  }
-
+const LandingPage = () => {
   return (
-    <div>
-      <nav className="navbar">
-        <h1 className="nav-logo" style={{ marginLeft: "20px" }}>
-          Logo
-        </h1>
-        <form
-          onSubmit={formSubmit}
-          className="nav-form"
-          style={{ marginLeft: "100px" }}
-        >
-          <input
-            onChange={searchHandler}
-            value={search}
-            type="text"
-            className="nav-Input"
-          ></input>
-          <button className="nav-btn" style={{ marginLeft: "70px" }}>
-            Search
-          </button>
-        </form>
-        <form style={{ marginRight: "20px" }}>
-          <button className="nav-btn">Sign Up</button>
-          <button className="nav-btn">login</button>
-        </form>
-      </nav>
-      <LandingPagebody />
-    </div>
+    <Fragment>
+      <NavBar />
+      <ProductHero />
+      <Footer />
+    </Fragment>
   );
-}
+};
 
-export default Landingpage;
+export default LandingPage;

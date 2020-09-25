@@ -12,6 +12,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Routes
+// Register and Login route
+app.use("/auth", require("./routes/jwtAuth"));
+
+// Dashboard route
+app.use("/dashboard", require("./routes/dashboard"));
+
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "client/build/index.html"));
 // });

@@ -12,9 +12,9 @@ CREATE TABLE users(
 CREATE TABLE recipes(
     recipe_id SERIAL,
     user_id UUID,
-    label VARCHAR(50) NOT NULL,
-    dietLabels VARCHAR(50),
-    source VARCHAR(50),
+    label VARCHAR(255) NOT NULL,
+    dietlabels VARCHAR(255),
+    source VARCHAR(255),
     image BYTEA,
     url VARCHAR(255),
     text VARCHAR(255),

@@ -1,36 +1,28 @@
-import express from "express";
-import dotenv from "dotenv";
-import sequelize from "./utils/sequelize.js";
-import syncModels from "./utils/syncModels.js";
+const express = require("express");
 const cors = require("cors");
+const pool = require("./db");
+const path = require("path");
+const PORT = process.env.PORT || 7000;
 
-const main = async () => {
-  const app = express();
-  dotenv.config({ path: "./config" });
+const app = express();
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "client/build")));
+// }
 
-  //load .env variable
+app.use(cors());
+app.use(express.json());
 
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  // middleware to parse json & urlencoded data
+// Routes
+// Register and Login route
+app.use("/auth", require("./routes/jwtAuth"));
 
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-  }
+// Dashboard route
+app.use("/dashboard", require("./routes/dashboard"));
 
-  // testing connection
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client/build/index.html"));
+// });
 
-  await syncModels(sequelize);
-
-  const PORT = 8080;
-
-  app.listen(PORT, () => {
-    console.log(`app is listening on http://localhost:${PORT}`);
-  });
-  //listen for requests on http://localhost:8080
-};
-
-main();
+app.listen(PORT, () => {
+  console.log(`Server is starting on port ${PORT}`);
+});

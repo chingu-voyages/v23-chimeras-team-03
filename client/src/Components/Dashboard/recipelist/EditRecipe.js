@@ -4,6 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -18,12 +22,18 @@ const useStyles = makeStyles((theme) => ({
   edit: {
     marginBottom: "40px",
   },
+  food: {
+    width: "200px",
+  },
+  text: {
+    width: "100%",
+  },
 }));
 
 const EditRecipe = ({ recipe, setRecipesChange }) => {
   const classes = useStyles();
   const [inputs, setInputs] = useState({
-    base64: recipe.base64,
+    image: recipe.image,
     label: recipe.label,
     dietlabels: recipe.dietlabels,
     source: recipe.source,
@@ -31,7 +41,7 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
     text: recipe.text,
   });
 
-  const { base64, label, dietlabels, source, url, text } = inputs;
+  const { image, label, dietLabels, source, url, text } = inputs;
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -45,7 +55,6 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
   };
   async function EditForm(id) {
     try {
-      const body = { inputs };
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
@@ -53,115 +62,133 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
       await fetch(`http://localhost:7000/dashboard/recipes/${id}`, {
         method: "PUT",
         headers: myHeaders,
-        body: JSON.stringify(body),
+        body: JSON.stringify(inputs),
       });
 
       setRecipesChange(true);
+      handleClose();
     } catch (error) {
       console.error(error.message);
     }
   }
   return (
     <Fragment>
-      <Button
-        variant="contained"
-        color="secondary"
-        fullWidth
-        onClick={handleOpen}
-        className={classes.edit}
-      >
-        Edit Recipe
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        className={classes.paper}
-      >
-        <input type="file" name="base64" onChange={(e) => onChange(e)} />
-        <img src={window.atob(recipe.base64)} alt="Food" />
-        <TextField
-          style={{ margin: 8 }}
-          placeholder={recipe.label}
-          helperText="Label"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          name="label"
-          value={label}
-          onChange={(e) => onChange(e)}
-        />
-        <TextField
-          style={{ margin: 8 }}
-          placeholder={recipe.dietlabels}
-          helperText="DietLables: Carbs|Keto|Protein..."
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          name="dietlabels"
-          value={dietlabels}
-          onChange={(e) => onChange(e)}
-        />
-        <TextField
-          style={{ margin: 8 }}
-          placeholder={recipe.source}
-          helperText="From source"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          name="source"
-          value={source}
-          onChange={(e) => onChange(e)}
-        />
-        <TextField
-          style={{ margin: 8 }}
-          placeholder={recipe.url}
-          helperText="Original source url path"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          name="url"
-          value={url}
-          onChange={(e) => onChange(e)}
-        />
-        <TextareaAutosize
-          aria-label="ingredients"
-          className={classes.text}
-          placeholder={recipe.text}
-          rowsMin={5}
-          name="text"
-          value={text}
-          onChange={(e) => onChange(e)}
-        />
+      <div>
         <Button
-          type="submit"
-          fullWidth
           variant="contained"
           color="secondary"
-          onClick={() => EditForm(recipe.recipe_id)}
-        >
-          Save Changes
-        </Button>
-        <Button
-          type="submit"
           fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.delete}
-          onClick={handleClose}
+          onClick={handleOpen}
+          className={classes.edit}
         >
-          Cancel
+          Edit Recipe
         </Button>
-      </Dialog>
+
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          className={classes.paper}
+        >
+          <DialogTitle id="alert-dialog-title">Edit Recipe</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <img src={recipe.imgUrl} alt="Food" className={classes.food} />
+              <TextField
+                style={{ margin: 8 }}
+                helperText="Image URL"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="image"
+                value={image}
+                onChange={(e) => onChange(e)}
+              />
+
+              <TextField
+                style={{ margin: 8 }}
+                helperText="Label"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="label"
+                value={label}
+                onChange={(e) => onChange(e)}
+              />
+              <TextField
+                style={{ margin: 8 }}
+                helperText="DietLables: Carbs|Keto|Protein..."
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="dietLabels"
+                value={dietLabels}
+                onChange={(e) => onChange(e)}
+              />
+              <TextField
+                style={{ margin: 8 }}
+                helperText="From source"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="source"
+                value={source}
+                onChange={(e) => onChange(e)}
+              />
+              <TextField
+                style={{ margin: 8 }}
+                helperText="Original source url path"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="url"
+                value={url}
+                onChange={(e) => onChange(e)}
+              />
+              <TextareaAutosize
+                aria-label="ingredients"
+                className={classes.text}
+                rowsMin={5}
+                name="text"
+                value={text}
+                onChange={(e) => onChange(e)}
+              />
+            </DialogContentText>
+          </DialogContent>
+
+          <DialogActions>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              onClick={() => EditForm(recipe.recipe_id)}
+            >
+              Save Changes
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </Fragment>
   );
 };

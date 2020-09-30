@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     marginBottom: "10px",
   },
+  food: {
+    width: "200px",
+  },
 }));
 
 const ListRecipes = ({ allRecipes, setRecipesChange }) => {
@@ -51,52 +54,52 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
           recipes[0].recipe_id !== null &&
           recipes.map((recipe) => (
             <div key={recipe.recipe_id}>
-              <img src={window.atob(recipe.base64)} alt="Food" />
+              <img src={recipe.imgUrl} alt="Food" className={classes.food} />
               <TextField
                 style={{ margin: 8 }}
-                placeholder={recipe.label}
                 helperText="Recipe title"
                 fullWidth
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
                 }}
+                value={recipe.label}
               />
               <TextField
                 style={{ margin: 8 }}
-                placeholder={recipe.dietlabels}
                 helperText="DietLables: Carbs|Keto|Protein..."
                 fullWidth
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
                 }}
+                value={recipe.dietlabels}
               />
               <TextField
                 style={{ margin: 8 }}
-                placeholder={recipe.source}
                 helperText="From source"
                 fullWidth
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
                 }}
+                value={recipe.source}
               />
               <TextField
                 style={{ margin: 8 }}
-                placeholder={recipe.url}
                 helperText="Original source url path"
                 fullWidth
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
                 }}
+                value={recipe.url}
               />
               <TextareaAutosize
                 aria-label="ingredients"
                 className={classes.text}
-                placeholder={recipe.text}
                 rowsMin={5}
+                value={recipe.text}
               />
 
               <Button

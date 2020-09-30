@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import LandingPage from "./Components/Landingpage";
-import Dashboard from "./Components/Dashboard";
+import Dashboard from "./Components/Dashboard/Dashboard";
 import SignIn from "./Components/signin";
 import SignUp from "./Components/signup";
 import {

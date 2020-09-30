@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
+import EditRecipe from "./EditRecipe";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     marginBottom: "10px",
   },
-  edit: {
-    marginBottom: "10px",
-  },
 }));
 
 const ListRecipes = ({ allRecipes, setRecipesChange }) => {
@@ -31,7 +30,7 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
 
   async function deleteRecipe(id) {
     try {
-      await fetch(`http://localhost:7000/dashboard/${id}`, {
+      await fetch(`http://localhost:7000/dashboard/recipes/${id}`, {
         method: "DELETE",
         headers: { jwt_token: localStorage.token },
       });
@@ -99,24 +98,19 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
                 placeholder={recipe.text}
                 rowsMin={5}
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.edit}
-              >
-                Edit Recipe
-              </Button>
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.delete}
+                onClick={() => deleteRecipe(recipe.recipe_id)}
               >
                 Delete Recipe
               </Button>
+              <EditRecipe recipe={recipe} setRecipesChange={setRecipesChange} />
+              <Divider />
             </div>
           ))}
       </div>

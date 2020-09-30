@@ -4,6 +4,7 @@ import ListRecipes from "./recipelist/ListRecipes";
 import InputRecipe from "./recipelist/InputRecipe";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,10 +13,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   header: {
-    position: "absolute",
-    top: "0",
-    left: "0",
-    marginBottom: "20px",
+    margin: "20px",
+    textAlign: "center",
   },
   add: {
     border: "1px solid red",
@@ -23,8 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
   edit: {
     padding: "40px",
-    border: "1px solid blue",
     marginTop: "20px",
+    backgroundColor: "white",
+    borderRadius: "25px",
+    boxShadow: "0 1px 5px rgba(0, 0, 9, 0.15)",
   },
 }));
 
@@ -64,7 +65,10 @@ const Dashboard = ({ setAuth }) => {
   return (
     <div className={classes.root}>
       <div className={classes.header}>
-        <h1>This is {name}'s recipe</h1>
+        <Typography variant="h5" component="h3" color="secondary">
+          This is {name}'s recipe
+        </Typography>
+
         <Button
           variant="contained"
           color="secondary"

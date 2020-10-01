@@ -9,7 +9,7 @@ import Divider from "@material-ui/core/Divider";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexWrap: "wrap",
+    flexDirection: "column",
   },
   textField: {
     marginLeft: theme.spacing(1),

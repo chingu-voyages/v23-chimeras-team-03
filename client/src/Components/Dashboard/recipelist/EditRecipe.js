@@ -6,7 +6,6 @@ import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -91,55 +90,53 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
         >
           <DialogTitle id="alert-dialog-title">Edit Recipe</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              <img src={recipe.image} alt="Food" className={classes.food} />
-              <TextField
-                style={{ margin: 8 }}
-                helperText="Image URL"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                name="image"
-                value={image}
-                onChange={(e) => onChange(e)}
-              />
+            <img src={recipe.image} alt="Food" className={classes.food} />
+            <TextField
+              style={{ margin: 8 }}
+              helperText="Image URL"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              name="image"
+              value={image}
+              onChange={(e) => onChange(e)}
+            />
 
-              <TextField
-                style={{ margin: 8 }}
-                helperText="Name of Recipe"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                name="title"
-                value={title}
-                onChange={(e) => onChange(e)}
-              />
-              <TextField
-                style={{ margin: 8 }}
-                helperText="DietLables: Carbs|Keto|Protein..."
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                name="diets"
-                value={diets}
-                onChange={(e) => onChange(e)}
-              />
+            <TextField
+              style={{ margin: 8 }}
+              helperText="Name of Recipe"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              name="title"
+              value={title}
+              onChange={(e) => onChange(e)}
+            />
+            <TextField
+              style={{ margin: 8 }}
+              helperText="DietLables: Carbs|Keto|Protein..."
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              name="diets"
+              value={diets}
+              onChange={(e) => onChange(e)}
+            />
 
-              <TextareaAutosize
-                aria-label="ingredients"
-                className={classes.text}
-                rowsMin={5}
-                name="ingredients"
-                value={ingredients}
-                onChange={(e) => onChange(e)}
-              />
-            </DialogContentText>
+            <TextareaAutosize
+              aria-label="ingredients"
+              className={classes.text}
+              rowsMin={5}
+              name="ingredients"
+              value={ingredients}
+              onChange={(e) => onChange(e)}
+            />
           </DialogContent>
 
           <DialogActions>

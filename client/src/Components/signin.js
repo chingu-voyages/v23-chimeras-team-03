@@ -113,8 +113,8 @@ const SignIn = ({ setAuth }) => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+                <Link href="/" variant="body2">
+                  Go back to Home Page
                 </Link>
               </Grid>
               <Grid item>

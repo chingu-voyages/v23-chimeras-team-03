@@ -34,14 +34,12 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
   const classes = useStyles();
   const [inputs, setInputs] = useState({
     image: recipe.image,
-    label: recipe.label,
-    dietlabels: recipe.dietlabels,
-    source: recipe.source,
-    url: recipe.url,
-    text: recipe.text,
+    title: recipe.title,
+    diets: recipe.diets,
+    ingredients: recipe.ingredients,
   });
 
-  const { image, label, dietLabels, source, url, text } = inputs;
+  const { image, title, diets, ingredients } = inputs;
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -94,7 +92,7 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
           <DialogTitle id="alert-dialog-title">Edit Recipe</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              <img src={recipe.imgUrl} alt="Food" className={classes.food} />
+              <img src={recipe.image} alt="Food" className={classes.food} />
               <TextField
                 style={{ margin: 8 }}
                 helperText="Image URL"
@@ -110,14 +108,14 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
 
               <TextField
                 style={{ margin: 8 }}
-                helperText="Label"
+                helperText="Name of Recipe"
                 fullWidth
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
                 }}
-                name="label"
-                value={label}
+                name="title"
+                value={title}
                 onChange={(e) => onChange(e)}
               />
               <TextField
@@ -128,40 +126,17 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                name="dietLabels"
-                value={dietLabels}
+                name="diets"
+                value={diets}
                 onChange={(e) => onChange(e)}
               />
-              <TextField
-                style={{ margin: 8 }}
-                helperText="From source"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                name="source"
-                value={source}
-                onChange={(e) => onChange(e)}
-              />
-              <TextField
-                style={{ margin: 8 }}
-                helperText="Original source url path"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                name="url"
-                value={url}
-                onChange={(e) => onChange(e)}
-              />
+
               <TextareaAutosize
                 aria-label="ingredients"
                 className={classes.text}
                 rowsMin={5}
-                name="text"
-                value={text}
+                name="ingredients"
+                value={ingredients}
                 onChange={(e) => onChange(e)}
               />
             </DialogContentText>
@@ -173,7 +148,7 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
               fullWidth
               variant="contained"
               color="secondary"
-              onClick={() => EditForm(recipe.recipe_id)}
+              onClick={() => EditForm(recipe.id)}
             >
               Save Changes
             </Button>

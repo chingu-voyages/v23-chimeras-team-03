@@ -7,16 +7,11 @@ router.get("/", authorize, async (req, res) => {
   try {
     // req.user has the payload
     const user = await pool.query(
-      "SELECT u.user_name, r.recipe_id, r.label, r.dietLabels, r.source, ENCODE(r.image, 'base64') as base64, r.url, r.text FROM users AS u LEFT JOIN recipes AS r ON u.user_id = r.user_id WHERE u.user_id = $1",
+      "SELECT u.name, r.id, r.title, r.diets, r.image, r.ingredients FROM users AS u LEFT JOIN recipes AS r ON u.id = r.user_id WHERE u.id = $1",
       [req.user.id]
     );
 
-    const users = user.rows.map(({ base64, ...rest }) => {
-      let buff = new Buffer.from(base64, "base64");
-      let imgUrl = buff.toString("ascii");
-      return { ...rest, imgUrl };
-    });
-    res.json(users);
+    res.json(user.rows);
   } catch (error) {
     res.status(500).send("Server Error");
   }
@@ -26,10 +21,10 @@ router.get("/", authorize, async (req, res) => {
 router.post("/recipes", authorize, async (req, res) => {
   try {
     console.log(req.body);
-    const { label, dietLabels, source, image, url, text } = req.body;
+    const { title, diets, image, ingredients } = req.body;
     const newRecipe = await pool.query(
-      "INSERT INTO recipes(user_id, label, dietLabels, source, image, url, text) VALUES ($1, $2, $3, $4, $5, ENCODE($6, 'base64'), $7) RETURNING *",
-      [req.user.id, label, dietLabels, source, image, url, text]
+      "INSERT INTO recipes(user_id, title, diets, image, ingredients) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [req.user.id, title, diets, image, ingredients]
     );
 
     res.json(newRecipe.rows[0]);
@@ -42,10 +37,10 @@ router.post("/recipes", authorize, async (req, res) => {
 router.put("/recipes/:id", authorize, async (req, res) => {
   try {
     const { id } = req.params;
-    const { label, dietLabels, source, image, url, text } = req.body;
+    const { title, diets, image, ingredients } = req.body;
     const updateRecipe = await pool.query(
-      "UPDATE recipes SET label = $1, dietLabels = $2, source = $3, image = $4, url = $5, text = $6 WHERE recipe_id = $7 AND user_id = $8 RETURNING *",
-      [label, dietLabels, source, image, url, text, id, req.user.id]
+      "UPDATE recipes SET title = $1, diets = $2, image = $3, ingredients = $4 WHERE id = $5 AND user_id = $6 RETURNING *",
+      [title, diets, image, ingredients, id, req.user.id]
     );
     if (updateRecipe.rows.length === 0) {
       return res.json("This recipe is not yours!");
@@ -62,7 +57,7 @@ router.delete("/recipes/:id", authorize, async (req, res) => {
     const { id } = req.params;
 
     const deleteRecipe = await pool.query(
-      "DELETE FROM recipes WHERE recipe_id = $1 AND user_id = $2 RETURNING *",
+      "DELETE FROM recipes WHERE id = $1 AND user_id = $2 RETURNING *",
       [id, req.user.id]
     );
 

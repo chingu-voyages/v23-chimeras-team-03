@@ -17,8 +17,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   add: {
-    border: "1px solid red",
+    padding: "40px",
     marginTop: "100px",
+    backgroundColor: "white",
+    borderRadius: "25px",
+    boxShadow: "0 1px 5px rgba(0, 0, 9, 0.15)",
   },
   edit: {
     padding: "40px",
@@ -51,7 +54,7 @@ const Dashboard = ({ setAuth }) => {
 
       const parseRes = await response.json();
       setAllRecipes(parseRes);
-      setName(parseRes[0].user_name);
+      setName(parseRes[0].name);
     } catch (error) {
       console.error(error.message);
     }

@@ -37,7 +37,7 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
         method: "DELETE",
         headers: { jwt_token: localStorage.token },
       });
-      setRecipes(recipes.filter((recipe) => recipe.recipe_id !== id));
+      setRecipes(recipes.filter((recipe) => recipe.id !== id));
     } catch (error) {
       console.error(error.message);
     }
@@ -51,10 +51,10 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
     <Fragment>
       <div className={classes.root}>
         {recipes.length !== 0 &&
-          recipes[0].recipe_id !== null &&
+          recipes[0].id !== null &&
           recipes.map((recipe) => (
-            <div key={recipe.recipe_id}>
-              <img src={recipe.imgUrl} alt="Food" className={classes.food} />
+            <div key={recipe.id}>
+              <img src={recipe.image} alt="Food" className={classes.food} />
               <TextField
                 style={{ margin: 8 }}
                 helperText="Recipe title"
@@ -63,7 +63,7 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                value={recipe.label}
+                value={recipe.title}
               />
               <TextField
                 style={{ margin: 8 }}
@@ -73,33 +73,14 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                value={recipe.dietlabels}
+                value={recipe.diets}
               />
-              <TextField
-                style={{ margin: 8 }}
-                helperText="From source"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={recipe.source}
-              />
-              <TextField
-                style={{ margin: 8 }}
-                helperText="Original source url path"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={recipe.url}
-              />
+
               <TextareaAutosize
                 aria-label="ingredients"
                 className={classes.text}
                 rowsMin={5}
-                value={recipe.text}
+                value={recipe.ingredients}
               />
 
               <Button
@@ -108,7 +89,7 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
                 variant="contained"
                 color="primary"
                 className={classes.delete}
-                onClick={() => deleteRecipe(recipe.recipe_id)}
+                onClick={() => deleteRecipe(recipe.id)}
               >
                 Delete Recipe
               </Button>

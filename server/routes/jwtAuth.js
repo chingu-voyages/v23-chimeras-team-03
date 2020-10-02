@@ -11,7 +11,7 @@ router.post("/register", validInfo, async (req, res) => {
 
   try {
     // Check if user exists, if yes, throw error
-    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
     if (user.rows.length > 0) {
@@ -24,12 +24,12 @@ router.post("/register", validInfo, async (req, res) => {
 
     // Enter the new user into database
     let newUser = await pool.query(
-      "INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
       [name, email, bcryptPassword]
     );
 
     // Generate jwt Token
-    const jwtToken = jwtGenerator(newUser.rows[0].user_id);
+    const jwtToken = jwtGenerator(newUser.rows[0].id);
     return res.json({ jwtToken });
   } catch (error) {
     console.error(error.message);
@@ -44,7 +44,7 @@ router.post("/login", validInfo, async (req, res) => {
   try {
     // Check if user does not exist
 
-    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
 
@@ -53,16 +53,13 @@ router.post("/login", validInfo, async (req, res) => {
     }
 
     // Check if incoming password matches the password in the database
-    const validPassword = await bcrypt.compare(
-      password,
-      user.rows[0].user_password
-    );
+    const validPassword = await bcrypt.compare(password, user.rows[0].password);
     if (!validPassword) {
       return res.status(401).json("Invalid Credential");
     }
 
     // Give them token
-    const jwtToken = jwtGenerator(user.rows[0].user_id);
+    const jwtToken = jwtGenerator(user.rows[0].id);
     return res.json({ jwtToken });
   } catch (error) {
     res.status(500).send("Server Error");

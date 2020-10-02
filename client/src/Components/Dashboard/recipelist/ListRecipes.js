@@ -33,7 +33,7 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
 
   async function deleteRecipe(id) {
     try {
-      await fetch(`http://localhost:7000/dashboard/recipes/${id}`, {
+      await fetch(`/dashboard/recipes/${id}`, {
         method: "DELETE",
         headers: { jwt_token: localStorage.token },
       });

@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   delete: {
     marginBottom: "10px",
+    color: "#FFFFFF",
+    background: "#F44336",
   },
   food: {
     width: "200px",
@@ -87,7 +89,6 @@ const ListRecipes = ({ allRecipes, setRecipesChange }) => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
                 className={classes.delete}
                 onClick={() => deleteRecipe(recipe.id)}
               >

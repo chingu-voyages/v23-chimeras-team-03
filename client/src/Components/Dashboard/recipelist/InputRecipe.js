@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
   text: {
     width: "100%",
   },
+  add: {
+    background: "#4CAF50",
+    color: "#FFFFFF",
+  },
 }));
 
 const InputRecipe = ({ setRecipesChange }) => {
@@ -107,7 +111,7 @@ const InputRecipe = ({ setRecipesChange }) => {
           type="submit"
           fullWidth
           variant="contained"
-          color="primary"
+          className={classes.add}
           disabled={!formState.isValid}
         >
           Add Recipe

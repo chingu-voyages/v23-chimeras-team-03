@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
   edit: {
     marginBottom: "40px",
+    background: "#FF9800",
+    color: "#FFFFFF",
   },
   food: {
     width: "200px",
@@ -73,7 +75,6 @@ const EditRecipe = ({ recipe, setRecipesChange }) => {
       <div>
         <Button
           variant="contained"
-          color="secondary"
           fullWidth
           onClick={handleOpen}
           className={classes.edit}

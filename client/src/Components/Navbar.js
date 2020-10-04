@@ -15,6 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { v4 as uuidv4 } from "uuid";
 import Axios from "axios";
 import ProductHero from "./ProductHero";
+require("dotenv").config();
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -133,8 +134,6 @@ function NavBar() {
   const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [alert, setAlert] = useState("");
-  const APP_ID = "109df0b1";
-  const APP_KEY = "8910f0fb1c1d41a518962eb7e3ae7375";
 
   async function getRecipes() {
     if (search !== "") {
@@ -160,6 +159,9 @@ function NavBar() {
     e.preventDefault();
     getRecipes();
   }
+
+  const APP_ID = process.env.REACT_APP_EDAMAM_APP_ID;
+  const APP_KEY = process.env.REACT_APP_EDAMAM_APP_KEY;
 
   const baseUrl = `https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}`;
 

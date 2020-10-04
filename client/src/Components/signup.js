@@ -129,7 +129,7 @@ const SignUp = ({ setAuth }) => {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Register
             </Button>
             <Grid container>
               <Grid item xs>

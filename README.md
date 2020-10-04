@@ -2,7 +2,7 @@
 
 # Food-Recipes-App | Voyage-23 | https://chingu.io/
 
-![Foody](/src/assets/Foody-recipesearchapp.png)
+[![Foody-recipesearchapp.png](https://i.postimg.cc/VkQzy5fc/Foody-recipesearchapp.png)](https://postimg.cc/QHb218K6)
 
 **LIVE LINK** : [here](https://foody-recipesearchapp.herokuapp.com/)
 

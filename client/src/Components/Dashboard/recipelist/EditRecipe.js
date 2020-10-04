@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   edit: {
     marginBottom: "40px",
     background: "#FF9800",
-    color: "#FFFFFF",
+    color: "#1A1C20",
   },
   food: {
     width: "200px",

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   delete: {
     marginBottom: "10px",
-    color: "#FFFFFF",
+    color: "#1A1C20",
     background: "#F44336",
   },
   food: {

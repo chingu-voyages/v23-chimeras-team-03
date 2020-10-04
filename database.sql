@@ -1,4 +1,4 @@
-CREATE DATABASE recipesearch;
+-- CREATE DATABASE recipesearch;
 
 --set extension
 CREATE TABLE users(
